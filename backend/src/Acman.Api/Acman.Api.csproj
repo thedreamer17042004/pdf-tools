@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="9.0.0" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Documents\Modules.Documents.csproj" />
+    <ProjectReference Include="..\Acman.Pdf.Infrastructure\Acman.Pdf.Infrastructure.csproj" />
+    <ProjectReference Include="..\Acman.Pdf.Engine.Pdfium\Acman.Pdf.Engine.Pdfium.csproj" />
+    <ProjectReference Include="..\Acman.BuildingBlocks\Acman.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\Modules.Identity\Modules.Identity.csproj" />
+    <ProjectReference Include="..\Modules.Processing\Modules.Processing.csproj" />
+    <ProjectReference Include="..\Acman.Pdf.Engine.PdfSharp\Acman.Pdf.Engine.PdfSharp.csproj" />
+    <ProjectReference Include="..\Acman.Word.Engine.OpenXml\Acman.Word.Engine.OpenXml.csproj" />
+  </ItemGroup>
+
+</Project>

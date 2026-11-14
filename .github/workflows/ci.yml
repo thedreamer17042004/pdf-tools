@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: acman
+          POSTGRES_PASSWORD: acman_dev_password
+          POSTGRES_DB: acman
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U acman -d acman"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+      - run: dotnet restore Acman.sln
+      - run: dotnet build Acman.sln --no-restore -c Release
+      - run: dotnet test Acman.sln --no-build -c Release --verbosity minimal
+        env:
+          ConnectionStrings__Database: Host=localhost;Port=5433;Database=acman;Username=acman;Password=acman_dev_password
+          ConnectionStrings__Redis: localhost:6379
+          Storage__Provider: FileSystem
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/apps/web/package-lock.json
+      - run: npm ci
+      - run: npm run build

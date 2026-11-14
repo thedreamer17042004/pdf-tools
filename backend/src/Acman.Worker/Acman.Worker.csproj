@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Acman.Worker-cd905913-7571-4ddf-892f-b39ed66218dc</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.18" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules.Processing\Modules.Processing.csproj" />
+    <ProjectReference Include="..\Modules.Documents\Modules.Documents.csproj" />
+    <ProjectReference Include="..\Acman.Pdf.Infrastructure\Acman.Pdf.Infrastructure.csproj" />
+    <ProjectReference Include="..\Acman.Pdf.Engine.Pdfium\Acman.Pdf.Engine.Pdfium.csproj" />
+    <ProjectReference Include="..\Acman.Pdf.Engine.PdfSharp\Acman.Pdf.Engine.PdfSharp.csproj" />
+  </ItemGroup>
+</Project>

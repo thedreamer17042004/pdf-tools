@@ -1,0 +1,25 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  cacheComponents: true,
+  partialPrefetching: true,
+  turbopack: {
+    rules: {
+      "*.css": {
+        loaders: ["@tailwindcss/turbopack"],
+        as: "*.css",
+      },
+    },
+  },
+  async rewrites() {
+    const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5080";
+    return [
+      {
+        source: "/api/proxy/:path*",
+        destination: `${api}/:path*`,
+      },
+    ];
+  },
+};
+
+export default nextConfig;

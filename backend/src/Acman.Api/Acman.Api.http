@@ -1,0 +1,6 @@
+@Acman.Api_HostAddress = http://localhost:5197
+
+GET {{Acman.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
